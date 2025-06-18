@@ -1,0 +1,74 @@
+# Go build artifacts
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+flowguard
+/flowguard
+
+# Go test binary, built with `go test -c`
+*.test
+
+# Go coverage files
+*.out
+*.cover
+*.html
+
+# Go workspace files
+go.work
+go.work.sum
+
+# Go module download cache
+/go/pkg/mod/
+
+# IDE and Editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Generated protobuf files (will be generated during build)
+*.pb.go
+*_grpc.pb.go
+internal/proto/*.pb.go
+internal/proto/*_grpc.pb.go
+
+# Docker volumes and data
+prometheus_data/
+grafana_data/
+
+# Log files
+*.log
+logs/
+
+# Environment files (may contain secrets)
+.env
+.env.local
+.env.*.local
+
+# Temporary files
+tmp/
+temp/
+
+# OS-specific files
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# Node.js (if using any frontend tools)
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Testing artifacts
+coverage/
+.nyc_output/
+
+# Backup files
+*.bak
+*.backup
+*.orig 
