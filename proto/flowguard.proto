@@ -1,0 +1,92 @@
+syntax = "proto3";
+
+package flowguard;
+
+option go_package = "flowguard/internal/proto";
+
+// FlowGuardService provides gRPC APIs for configuring rate limits
+service FlowGuardService {
+  // SetClientConfig creates or updates a client's rate limiting configuration
+  rpc SetClientConfig(SetClientConfigRequest) returns (SetClientConfigResponse);
+  
+  // GetClientConfig retrieves a client's configuration
+  rpc GetClientConfig(GetClientConfigRequest) returns (GetClientConfigResponse);
+  
+  // GetClientStats retrieves a client's usage statistics
+  rpc GetClientStats(GetClientStatsRequest) returns (GetClientStatsResponse);
+  
+  // ListClients lists all configured clients
+  rpc ListClients(ListClientsRequest) returns (ListClientsResponse);
+  
+  // DeleteClient removes a client configuration
+  rpc DeleteClient(DeleteClientRequest) returns (DeleteClientResponse);
+}
+
+// ClientConfig represents the rate limiting configuration for a client
+message ClientConfig {
+  string client_id = 1;
+  optional int64 rpm = 2;  // Requests per minute
+  optional int64 tpm = 3;  // Tokens per minute
+  bool enabled = 4;
+}
+
+// ClientStats represents usage statistics for a client
+message ClientStats {
+  string client_id = 1;
+  int64 total_requests = 2;
+  int64 success_requests = 3;
+  int64 dropped_requests = 4;
+  int64 rpm_dropped = 5;
+  int64 tpm_dropped = 6;
+  int64 tokens_used = 7;
+  int64 rpm_remaining = 8;
+  int64 tpm_remaining = 9;
+  int64 last_request_time = 10; // Unix timestamp
+  double avg_latency_ms = 11;
+}
+
+// Request/Response messages
+message SetClientConfigRequest {
+  ClientConfig config = 1;
+}
+
+message SetClientConfigResponse {
+  bool success = 1;
+  string message = 2;
+}
+
+message GetClientConfigRequest {
+  string client_id = 1;
+}
+
+message GetClientConfigResponse {
+  ClientConfig config = 1;
+  bool found = 2;
+}
+
+message GetClientStatsRequest {
+  string client_id = 1;
+}
+
+message GetClientStatsResponse {
+  ClientStats stats = 1;
+  bool found = 2;
+}
+
+message ListClientsRequest {
+  // Empty for now, could add pagination parameters later
+}
+
+message ListClientsResponse {
+  repeated ClientConfig clients = 1;
+  repeated ClientStats stats = 2;
+}
+
+message DeleteClientRequest {
+  string client_id = 1;
+}
+
+message DeleteClientResponse {
+  bool success = 1;
+  string message = 2;
+} 
