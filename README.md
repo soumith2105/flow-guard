@@ -496,28 +496,3 @@ Set environment variable for more verbose logging:
 ```bash
 export LOG_LEVEL=debug
 ```
-
-## 📜 License
-
-MIT License - see LICENSE file for details.
-
-## 🤝 Contributing
-
-1. Fork the repository
-2. Create a feature branch
-3. Make your changes
-4. Add tests if applicable
-5. Submit a pull request
-
-**Note**: Do not commit generated protobuf files (`*.pb.go`, `*_grpc.pb.go`) - they are auto-generated during build.
-
-## 📞 Support
-
-For issues and questions:
-- Open an issue on GitHub
-- Check the troubleshooting section
-- Review the example usage
-
----
-
-**FlowGuard** - Intelligent API rate limiting made simple. 🚀 
